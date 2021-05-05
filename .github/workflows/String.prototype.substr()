@@ -1,0 +1,190 @@
+String.prototype.substr()
+The substr() method returns a portion of the string, starting at the specified index and extending for a given number of characters afterwards.
+
+const str = 'Mozilla';
+
+console.log(str.substr(1, 2));
+// expected output: "oz"
+
+console.log(str.substr(2));
+// expected output: "zilla"
+> "oz"
+> "zilla
+substr(start)
+substr(start, length)
+Parameters
+start
+The index of the first character to include in the returned substring.
+length
+Optional. The number of characters to extract.
+Return value
+A new string containing the specified part of the given string.
+
+Description
+substr() extracts length characters from a str, counting from the start index.
+
+If start is a positive number, the index starts counting at the start of the string. Its value is capped at str.length.
+If start is a negative number, the index starts counting from the end of the string. Its value is capped at -str.length.
+Note: In Microsoft JScript, negative values of the start argument are not considered to refer to the end of the string.
+If length is omitted, substr() extracts characters to the end of the string.
+If length is undefined, substr() extracts characters to the end of the string.
+If length is a negative number, it is treated as 0.
+For both start and length, NaN is treated as 0.
+Polyfill
+Microsoft's JScript does not support negative values for the start index. To use this feature in JScript, you can use the following code:
+
+// only run when the substr() function is broken
+if ('ab'.substr(-1) != 'b') {
+  /**
+   *  Get the substring of a string
+   *  @param  {integer}  start   where to start the substring
+   *  @param  {integer}  length  how many characters to return
+   *  @return {string}
+   */
+  String.prototype.substr = function(substr) {
+    return function(start, length) {
+      // call the original method
+      return substr.call(this,
+      	// did we get a negative start, calculate how much it is from the beginning of the string
+        // adjust the start parameter for negative value
+        start < 0 ? this.length + start : start,
+        length)
+    }
+  }(String.prototype.substr);
+}
+Examples
+Using substr()
+var aString = 'Mozilla';
+
+console.log(aString.substr(0, 1));   // 'M'
+console.log(aString.substr(1, 0));   // ''
+console.log(aString.substr(-1, 1));  // 'a'
+console.log(aString.substr(1, -1));  // ''
+console.log(aString.substr(-3));     // 'lla'
+console.log(aString.substr(1));      // 'ozilla'
+console.log(aString.substr(-20, 2)); // 'Mo'
+console.log(aString.substr(20, 2));  // ''
+Specifications
+Specification
+ECMAScript (ECMA-262)
+The definition of 'String.prototype.substr' in that specification.
+Browser compatibility
+Report problems with this compatibility data on GitHub
+substrDeprecated
+ChromeFull support1
+EdgeFull support12
+FirefoxFull support1
+Internet ExplorerFull support4
+OperaFull support4
+SafariFull support1
+WebView AndroidFull support1
+Chrome AndroidFull support18
+Firefox for AndroidFull support4
+Opera AndroidFull support10.1
+Safari on iOSFull support1
+Samsung InternetFull support1.0
+Node.jsFull support0.10.0
+Legend
+Full supportFull support
+Deprecated. Not for use in new websites.
+See also
+String.prototype.slice()
+String.prototype.substring()
+Found a problem with this page?
+Source on GitHub
+Report a problem with this content on GitHub
+Want to fix the problem yourself? See our Contribution guide.
+Last modified: Apr 30, 2021, by MDN contributors
+
+Change your language
+Select your preferred language
+English (US)
+ Change language
+Related Topics
+Standard built-in objects
+String
+Properties
+String length
+Methods
+String.prototype[@@iterator]()
+String.prototype.anchor()
+String.prototype.at()
+String.prototype.big()
+String.prototype.blink()
+String.prototype.bold()
+String.prototype.charAt()
+String.prototype.charCodeAt()
+String.prototype.codePointAt()
+String.prototype.concat()
+String.prototype.endsWith()
+String.prototype.fixed()
+String.prototype.fontcolor()
+String.prototype.fontsize()
+String.fromCharCode()
+String.fromCodePoint()
+String.prototype.includes()
+String.prototype.indexOf()
+String.prototype.italics()
+String.prototype.lastIndexOf()
+String.prototype.link()
+String.prototype.localeCompare()
+String.prototype.match()
+String.prototype.matchAll()
+String.prototype.normalize()
+String.prototype.padEnd()
+String.prototype.padStart()
+String.raw()
+String.prototype.repeat()
+String.prototype.replace()
+String.prototype.replaceAll()
+String.prototype.search()
+String.prototype.slice()
+String.prototype.small()
+String.prototype.split()
+String.prototype.startsWith()
+String.prototype.strike()
+String.prototype.sub()
+String.prototype.substr()
+String.prototype.substring()
+String.prototype.sup()
+String.prototype.toLocaleLowerCase()
+String.prototype.toLocaleUpperCase()
+String.prototype.toLowerCase()
+String.prototype.toSource()
+String.prototype.toString()
+String.prototype.toUpperCase()
+String.prototype.trim()
+String.prototype.trimEnd()
+String.prototype.trimStart()
+String.prototype.valueOf()
+Inheritance:
+Function
+Properties
+Function.arguments
+Function.caller
+Function.displayName
+Function.length
+Function.name
+Methods
+Function.prototype.apply()
+Function.prototype.bind()
+Function.prototype.call()
+Function.prototype.toSource()
+Function.prototype.toString()
+Object
+Properties
+Object.prototype.constructor
+Object.prototype.__proto__
+Methods
+Object.prototype.__defineGetter__()
+Object.prototype.__defineSetter__()
+Object.prototype.__lookupGetter__()
+Object.prototype.__lookupSetter__()
+Object.prototype.hasOwnProperty()
+Object.prototype.isPrototypeOf()
+Object.prototype.propertyIsEnumerable()
+Object.setPrototypeOf()
+Object.prototype.toLocaleString()
+Object.prototype.toSource()
+Object.prototype.toString()
+Object.prototype.valueOf()
