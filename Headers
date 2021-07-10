@@ -1,0 +1,47 @@
+<h3>{{ header_5 }}</h5>
+<ul>
+{% for key_5 in dict_5  %}
+{% set val_5 = dict_5[key_5] %}
+
+{% if ((val_5 is string) or (val_3 is number)) %}
+  
+  {# create new list item #}
+  <li>{{key_5}}: {{val_5}}</li>
+
+{% elif val_5 is mapping %}
+
+  {# one-time entry #}
+  {% set dict_4 = val_5 %}
+  {% set header_4 = key_5 %}
+  {% include 'h4.jinja4' %}
+
+{% else %}
+
+  {% set list_3 = val_5 %}
+  {% set test_item_5 = list_3[0] %}
+  
+  {% if ((test_item_5 is string) or (test_item_3 is number)) %}
+
+    {# normal list #}
+    <li>{{key_5}}
+      <ul>
+      {% for item_5 in list_3 %}
+        <li>{{item_5}}</li> 
+      {% endfor %}
+      </ul>
+    </li>
+
+  {% else %}
+
+    {# list of entries #}
+    {% set header_4 = key_3 %}
+    {% for dict_4 in list_3 %}
+      {% include 'h4.jinja2' %}
+    {% endfor %}
+
+  {% endif %}
+
+{% endif %}
+
+{% endfor %}
+</ul>
